@@ -1,0 +1,81 @@
+version: '3.8'
+services:
+  information-architect:
+    build: .
+    command: ["node","agentDaemon.js","Information Architect"]
+    volumes:
+      - ./:/app
+    environment:
+      - GH_TOKEN=${GH_TOKEN}
+      - GITHUB_OWNER=${GITHUB_OWNER:-johnnywhitemike}
+      - GITHUB_REPO=${GITHUB_REPO:-silver-pay}
+    restart: unless-stopped
+
+  blueprint-designer:
+    build: .
+    command: ["node","agentDaemon.js","Blueprint Designer"]
+    volumes:
+      - ./:/app
+    environment:
+      - GH_TOKEN=${GH_TOKEN}
+      - GITHUB_OWNER=${GITHUB_OWNER:-johnnywhitemike}
+      - GITHUB_REPO=${GITHUB_REPO:-silver-pay}
+    restart: unless-stopped
+
+  project-manager:
+    build: .
+    command: ["node","agentDaemon.js","Project Manager"]
+    volumes:
+      - ./:/app
+    environment:
+      - GH_TOKEN=${GH_TOKEN}
+      - GITHUB_OWNER=${GITHUB_OWNER:-johnnywhitemike}
+      - GITHUB_REPO=${GITHUB_REPO:-silver-pay}
+    restart: unless-stopped
+
+  central-assistant:
+    build: .
+    command: ["node","agentDaemon.js","Central Assistant"]
+    volumes:
+      - ./:/app
+    environment:
+      - GH_TOKEN=${GH_TOKEN}
+      - GITHUB_OWNER=${GITHUB_OWNER:-johnnywhitemike}
+      - GITHUB_REPO=${GITHUB_REPO:-silver-pay}
+    restart: unless-stopped
+
+  load-balancer:
+    build: .
+    command: ["node","agentDaemon.js","Load Balancer"]
+    volumes:
+      - ./:/app
+    environment:
+      - GH_TOKEN=${GH_TOKEN}
+      - GITHUB_OWNER=${GITHUB_OWNER:-johnnywhitemike}
+      - GITHUB_REPO=${GITHUB_REPO:-silver-pay}
+    restart: unless-stopped
+
+  reverse-engineer:
+    build: .
+    command: ["node","agentDaemon.js","Reverse Engineer"]
+    volumes:
+      - ./:/app
+    environment:
+      - GH_TOKEN=${GH_TOKEN}
+      - GITHUB_OWNER=${GITHUB_OWNER:-johnnywhitemike}
+      - GITHUB_REPO=${GITHUB_REPO:-silver-pay}
+    restart: unless-stopped
+
+  ade-dashboard:
+    build: .
+    command: ["node","dashboardServer.js"]
+    volumes:
+      - ./:/app
+    ports:
+      - "4005:4005"
+    environment:
+      - ADE_DASHBOARD_PORT=4005
+      - GH_TOKEN=${GH_TOKEN}
+      - GITHUB_OWNER=${GITHUB_OWNER:-johnnywhitemike}
+      - GITHUB_REPO=${GITHUB_REPO:-silver-pay}
+    restart: unless-stopped
