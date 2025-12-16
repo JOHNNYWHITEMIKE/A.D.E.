@@ -1,5 +1,6 @@
 // githubIssue.js — minimal helper to create GitHub issues when GH_TOKEN is provided
 const https = require('https');
+const githubApp = require('./githubApp');
 
 function request(options, payload) {
   return new Promise((resolve, reject) => {
@@ -21,8 +22,16 @@ function request(options, payload) {
 }
 
 async function createIssueDirect({ owner, repo, title, body }) {
-  const token = process.env.GH_TOKEN || process.env.GITHUB_TOKEN || process.env.GH_API_TOKEN || process.env.GH_PERSONAL_TOKEN;
-  if (!token) throw new Error('GH token not available in environment; set GH_TOKEN to enable auto-issues');
+  // prefer GitHub App installation token if App creds are present
+  let token = process.env.GH_TOKEN || process.env.GITHUB_TOKEN || process.env.GH_API_TOKEN || process.env.GH_PERSONAL_TOKEN;
+  if (process.env.GITHUB_APP_ID && process.env.GITHUB_APP_INSTALLATION_ID && process.env.GITHUB_APP_PRIVATE_KEY) {
+    try {
+      token = await githubApp.getInstallationToken({ appId: process.env.GITHUB_APP_ID, installationId: process.env.GITHUB_APP_INSTALLATION_ID, privateKeyPem: process.env.GITHUB_APP_PRIVATE_KEY });
+    } catch (err) {
+      console.log('Failed to get installation token from GitHub App, falling back to GH_TOKEN:', err.message);
+    }
+  }
+  if (!token) throw new Error('GH token not available in environment; set GH_TOKEN or GitHub App credentials to enable auto-issues');
 
   const payload = JSON.stringify({ title, body });
   const options = {
@@ -41,8 +50,16 @@ async function createIssueDirect({ owner, repo, title, body }) {
 }
 
 async function dispatchRepositoryEvent({ owner, repo, event_type, client_payload }) {
-  const token = process.env.GH_TOKEN || process.env.GITHUB_TOKEN || process.env.GH_API_TOKEN || process.env.GH_PERSONAL_TOKEN;
-  if (!token) throw new Error('GH token not available in environment; set GH_TOKEN to enable repository dispatch');
+  // prefer GitHub App installation token if App creds are present
+  let token = process.env.GH_TOKEN || process.env.GITHUB_TOKEN || process.env.GH_API_TOKEN || process.env.GH_PERSONAL_TOKEN;
+  if (process.env.GITHUB_APP_ID && process.env.GITHUB_APP_INSTALLATION_ID && process.env.GITHUB_APP_PRIVATE_KEY) {
+    try {
+      token = await githubApp.getInstallationToken({ appId: process.env.GITHUB_APP_ID, installationId: process.env.GITHUB_APP_INSTALLATION_ID, privateKeyPem: process.env.GITHUB_APP_PRIVATE_KEY });
+    } catch (err) {
+      console.log('Failed to get installation token from GitHub App, falling back to GH_TOKEN:', err.message);
+    }
+  }
+  if (!token) throw new Error('GH token not available in environment; set GH_TOKEN or GitHub App credentials to enable repository dispatch');
 
   const payload = JSON.stringify({ event_type, client_payload });
   const options = {

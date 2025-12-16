@@ -31,3 +31,19 @@ By default, A.D.E. now prefers to trigger a `repository_dispatch` event on the t
 Control behavior with the `USE_REPO_DISPATCH` env var (defaults to `true`). Set it to `false` to revert to direct API issue creation.
 
 Long-term recommendation: register a GitHub App with fine-grained permissions and update A.D.E. to use installation tokens (we can add this flow next). For now, `GH_TOKEN` + repo dispatch gives a secure, auditable path.
+
+GitHub App setup (optional, recommended):
+
+1. Create a GitHub App in your account settings (Settings → Developer settings → GitHub Apps).
+2. Give the App `Repository permissions: Issues - Read & Write` and `Actions - Read & Write` as needed.
+3. Generate and download the App private key (PEM).
+4. Install the App on the `GITHUB_OWNER/GITHUB_REPO` repository and note the Installation ID.
+5. Export the following as environment variables in your A.D.E. runtime (or add them to a local `.env`):
+
+```
+GITHUB_APP_ID=<app-id>
+GITHUB_APP_INSTALLATION_ID=<installation-id>
+GITHUB_APP_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
+```
+
+With these set, A.D.E. will automatically use installation tokens (short-lived, scoped) for dispatch and issue creation.
