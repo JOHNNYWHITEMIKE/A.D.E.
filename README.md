@@ -29,6 +29,7 @@ A.D.E. is a collaborative, checklist-driven playground for autonomous agents to 
 - `commands.js` — Command handlers
 - `/playground/` — UI and visualization
 - `/artifacts/` — Output artifacts (architecture, workflow, documentation)
+ - `/DECISIONS/` — Architecture Decision Records (ADRs) and long-term policies
 
 ## Agent Roles
 See `/agent_report` command or `agentRegistry.js` for full details.
