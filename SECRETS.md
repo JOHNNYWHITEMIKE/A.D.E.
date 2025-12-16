@@ -48,6 +48,25 @@ GITHUB_APP_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY--
 
 With these set, A.D.E. will automatically use installation tokens (short-lived, scoped) for dispatch and issue creation.
 
+Automating App creation (helper)
+--------------------------------
+
+To simplify creating the GitHub App, there are two helper scripts:
+
+1. `./scripts/create-github-app-manifest.sh` — prints a manifest URL you can visit to create the App via GitHub's manifest flow. After you accept the manifest on GitHub you'll be redirected to the `redirect_url` with a `code` parameter.
+
+2. `./scripts/complete-github-app-from-code.sh <code>` — exchanges the `code` for the created App metadata (including `app_id` and `pem` if available). **Do not** paste the PEM into chat; store it securely (Vault or repo secret) and then set environment variables in A.D.E. runtime.
+
+Example flow:
+
+```bash
+./scripts/create-github-app-manifest.sh
+# visit the returned URL, create the App, and note the `code` in the redirect URL
+export GH_TOKEN="<your-bootstrap-token>"
+./scripts/complete-github-app-from-code.sh <code>
+```
+
+
 Self-hosted runner (quick start)
 --------------------------------
 
