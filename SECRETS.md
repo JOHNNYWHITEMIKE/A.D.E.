@@ -19,3 +19,15 @@ docker compose -f docker-compose.yml down && docker compose -f docker-compose.ym
 ```
 
 If you shared the token in an insecure channel (e.g. chat), rotate it immediately and create a new token.
+
+Repository dispatch vs direct issue creation
+-----------------------------------------
+
+By default, A.D.E. now prefers to trigger a `repository_dispatch` event on the target repo. This has two benefits:
+
+- The actual issue creation runs on GitHub Actions (auditable, runs on GitHub infra).
+- You can add more automation/validation in the workflow that creates the issue.
+
+Control behavior with the `USE_REPO_DISPATCH` env var (defaults to `true`). Set it to `false` to revert to direct API issue creation.
+
+Long-term recommendation: register a GitHub App with fine-grained permissions and update A.D.E. to use installation tokens (we can add this flow next). For now, `GH_TOKEN` + repo dispatch gives a secure, auditable path.
