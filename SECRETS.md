@@ -70,3 +70,26 @@ Notes:
 - The runner will show up in repository settings under **Settings → Actions → Runners** once registered.
 - Runner labels can be added via the GitHub REST API or during configuration; the helper script adds the `ade` label when feasible.
 - For production, consider installing a systemd service or orchestrating with Docker Compose and a token refresh mechanism (registration tokens expire shortly after issuance).
+
+Systemd & persistence (optional)
+--------------------------------
+
+For a simple on-host persistence strategy, you can install the provided systemd unit and timer which call the `ensure-runner.sh` helper to keep the runner alive:
+
+1. Copy the helper into a location on the host where it can execute (by default it refers to the repository scripts):
+
+```bash
+# from the repository root
+sudo cp AAA/ADE_TEMPLATE/scripts/ensure-runner.sh /usr/local/bin/ensure-runner.sh
+sudo chmod +x /usr/local/bin/ensure-runner.sh
+
+sudo cp AAA/ADE_TEMPLATE/systemd/ade-self-hosted-runner.service /etc/systemd/system/ade-self-hosted-runner.service
+sudo cp AAA/ADE_TEMPLATE/systemd/ade-self-hosted-runner.timer /etc/systemd/system/ade-self-hosted-runner.timer
+
+sudo systemctl daemon-reload
+sudo systemctl enable --now ade-self-hosted-runner.timer
+```
+
+2. The timer runs `ensure-runner.sh` at boot and every 10 minutes; the helper will call the `setup-self-hosted-runner.sh` script if the container is not running.
+
+Security note: `setup-self-hosted-runner.sh` still requires `GH_TOKEN` in the environment to register the runner; restrict who can read this token on the host. For higher assurance, consider using a machine user with limited scopes or GitHub App flows.

@@ -1,0 +1,13 @@
+[Unit]
+Description=A.D.E. self-hosted GitHub Actions runner (helper service)
+After=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=%h
+ExecStart=/usr/local/bin/ensure-runner.sh
+Environment=HOME=%h
+
+[Install]
+WantedBy=multi-user.target
