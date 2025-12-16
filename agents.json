@@ -1,0 +1,37 @@
+{
+  "agents": [
+    { "name": "Information Architect", "responsibilities": [
+      "Designs and governs information architecture",
+      "Defines data semantics, workflows, and schemas",
+      "Ensures compliance with project management methodologies",
+      "Creates visual project management maps",
+      "Interfaces with Blueprint Designer",
+      "Trained in PMBOK, Agile, Scrum, BPMN, UML, ERD, ontology modeling"
+    ] },
+    { "name": "Blueprint Designer", "responsibilities": [
+      "Converts architecture into visual, reusable templates",
+      "Designs UI/UX, data flow, and execution timeline visualization",
+      "Maintains blueprint pattern library"
+    ] },
+    { "name": "Project Manager", "responsibilities": [
+      "Oversees checklist-driven automation flow",
+      "Delegates tasks and verifies completion",
+      "Reports updates to Central Assistant"
+    ] },
+    { "name": "Central Assistant", "responsibilities": [
+      "Monitors and validates progress",
+      "Synchronizes agents",
+      "Acts as status monitor and resolves errors"
+    ] },
+    { "name": "Load Balancer", "responsibilities": [
+      "Distributes workloads",
+      "Prevents overutilization and idle states",
+      "Ensures agent synchronization"
+    ] },
+    { "name": "Reverse Engineer", "responsibilities": [
+      "Evaluates completed projects for lessons learned",
+      "Reverse-engineers structure and dependencies",
+      "Provides feedback to Information Architect"
+    ] }
+  ]
+}

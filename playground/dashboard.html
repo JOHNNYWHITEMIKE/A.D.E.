@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>A.D.E. Project Flow Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
+    header { background: #222; color: #fff; padding: 1em; text-align: center; }
+    main { display: flex; flex-wrap: wrap; justify-content: space-around; padding: 2em; }
+    section { background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #0001; margin: 1em; padding: 1.5em; min-width: 320px; max-width: 600px; flex: 1; }
+    h2 { margin-top: 0; }
+    .checklist-item { margin: 0.5em 0; }
+    .complete { color: green; }
+    .incomplete { color: #b00; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>A.D.E. Project Flow Dashboard</h1>
+  </header>
+  <main>
+    <section id="checklist">
+      <h2>Checklist Progress</h2>
+      <ul id="checklist-list"></ul>
+    </section>
+    <section id="agents">
+      <h2>Agent Collaboration</h2>
+      <ul id="agent-list"></ul>
+    </section>
+    <section id="blueprints">
+      <h2>Blueprint Library</h2>
+      <div id="blueprint-list">(Coming soon)</div>
+    </section>
+  </main>
+  <script src="dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "ade-checklist-system",
+  "version": "1.0.0",
+  "description": "Autonomous Development Environment (A.D.E.) checklist-driven workflow core.",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "author": "A.D.E. System",
+  "license": "MIT"
+}

@@ -1,0 +1,12 @@
+{
+  "checklist": [
+    { "order": 1, "phase": "Clarify Project Requirements", "agent": "Information Architect", "status": "incomplete" },
+    { "order": 2, "phase": "Scaffold the Project", "agent": "Project Manager", "status": "incomplete" },
+    { "order": 3, "phase": "Customize the Project", "agent": "Blueprint Designer + Architect", "status": "incomplete" },
+    { "order": 4, "phase": "Install Required Extensions", "agent": "Load Balancer", "status": "incomplete" },
+    { "order": 5, "phase": "Compile the Project", "agent": "Project Manager", "status": "incomplete" },
+    { "order": 6, "phase": "Create and Run Task", "agent": "Central Assistant", "status": "incomplete" },
+    { "order": 7, "phase": "Launch the Project", "agent": "Central Assistant + Load Balancer", "status": "incomplete" },
+    { "order": 8, "phase": "Ensure Documentation is Complete", "agent": "Reverse Engineer + Architect", "status": "incomplete" }
+  ]
+}

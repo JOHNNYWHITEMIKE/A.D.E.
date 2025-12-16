@@ -1,0 +1,8 @@
+- [x] Clarify Project Requirements → Information Architect
+- [x] Scaffold the Project → Project Manager
+- [x] Customize the Project → Blueprint Designer + Architect
+- [x] Install Required Extensions → Load Balancer
+- [x] Compile the Project → Project Manager
+- [x] Create and Run Task → Central Assistant
+- [x] Launch the Project → Central Assistant + Load Balancer
+- [x] Ensure Documentation is Complete → Reverse Engineer + Architect
