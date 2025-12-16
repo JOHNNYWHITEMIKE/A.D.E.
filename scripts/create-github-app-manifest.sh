@@ -26,11 +26,7 @@ read -r -d '' MANIFEST_JSON <<EOF || true
 }
 EOF
 
-ENC=$(python3 - <<PY
-import urllib.parse, json
-print(urllib.parse.quote(json.dumps(${MANIFEST_JSON})))
-PY
-)
+ENC=$(printf "%s" "$MANIFEST_JSON" | python3 -c 'import sys, json, urllib.parse; print(urllib.parse.quote(json.dumps(json.load(sys.stdin))))')
 
 URL="https://github.com/settings/apps/new?manifest=${ENC}"
 

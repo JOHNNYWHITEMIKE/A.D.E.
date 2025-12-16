@@ -48,6 +48,19 @@ GITHUB_APP_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY--
 
 With these set, A.D.E. will automatically use installation tokens (short-lived, scoped) for dispatch and issue creation.
 
+Storing App secrets in the repo
+-------------------------------
+
+You can add the `GITHUB_APP_PRIVATE_KEY`, `GITHUB_APP_ID`, and `GITHUB_APP_INSTALLATION_ID` to the repository secrets via the GitHub UI (Settings → Secrets → Actions) or using the `gh` CLI. A helper is provided:
+
+```bash
+./scripts/set-repo-secret-gh.sh GITHUB_APP_PRIVATE_KEY "$(cat path/to/private-key.pem)"
+./scripts/set-repo-secret-gh.sh GITHUB_APP_ID "12345"
+./scripts/set-repo-secret-gh.sh GITHUB_APP_INSTALLATION_ID "67890"
+```
+
+If `gh` is not available, add the secrets via the GitHub repository Settings page.
+
 Automating App creation (helper)
 --------------------------------
 
