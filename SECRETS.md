@@ -47,3 +47,26 @@ GITHUB_APP_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY--
 ```
 
 With these set, A.D.E. will automatically use installation tokens (short-lived, scoped) for dispatch and issue creation.
+
+Self-hosted runner (quick start)
+--------------------------------
+
+To bring up a self-hosted runner (Docker-based) for the `GITHUB_OWNER/GITHUB_REPO` repo, run:
+
+```bash
+export GH_TOKEN="<your-token-with-repo-admin-scopes>"
+export GITHUB_OWNER="johnnywhitemike"
+export GITHUB_REPO="silver-pay"
+./scripts/setup-self-hosted-runner.sh
+```
+
+This script will request a registration token from GitHub, start a Docker container running a popular runner image, and wait for the runner to appear in the repository settings. To stop and remove the runner container, run:
+
+```bash
+./scripts/remove-self-hosted-runner.sh
+```
+
+Notes:
+- The runner will show up in repository settings under **Settings → Actions → Runners** once registered.
+- Runner labels can be added via the GitHub REST API or during configuration; the helper script adds the `ade` label when feasible.
+- For production, consider installing a systemd service or orchestrating with Docker Compose and a token refresh mechanism (registration tokens expire shortly after issuance).
